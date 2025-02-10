@@ -1,0 +1,43 @@
+services:
+
+  postgres:
+    image: postgres:latest
+    container_name: postgresdb
+    restart: always
+    environment:
+      - POSTGRES_USER=dap  
+      - POSTGRES_PASSWORD=dap
+      - POSTGRES_DB=postgres
+    ports:
+      - "5432:5432"  
+    volumes:
+      - postgres_data:/var/lib/postgresql  
+
+  couchdb:
+    image: couchdb:latest
+    container_name: couchdb
+    restart: always
+    environment:
+      - COUCHDB_USER=dap
+      - COUCHDB_PASSWORD=dap
+    ports:
+      - "5984:5984" 
+    volumes:
+      - couch_data:/opt/couchdb/data
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: dap
+      MONGO_INITDB_ROOT_PASSWORD: dap
+      MONGO_INITDB_DATABASE: dap
+    ports:
+      - "27017-27019:27017-27019" 
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+volumes:
+  postgres_data: {}
+  couch_data: {}

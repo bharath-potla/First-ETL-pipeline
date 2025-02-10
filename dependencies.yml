@@ -1,0 +1,17 @@
+name: etl-env
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - plotly
+  - dagster
+  - dagster-pandas
+  - dagit
+  - pandas
+  - numpy
+  - psycopg2
+  - pymongo
+  - sqlalchemy
+  - couchdb-python
+  - pendulum<3.0
+  
